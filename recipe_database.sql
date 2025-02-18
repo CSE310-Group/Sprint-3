@@ -21,7 +21,7 @@ CREATE TABLE ingredients (
     ingredientID INT AUTO_INCREMENT PRIMARY KEY,
     recipeID INT,
     name VARCHAR(255) NOT NULL,
-    quantity VARCHAR(100), -- Change to amount(number) and measurement(id, calls table)
+    quantity VARCHAR(100), -- Change to amount(number) and measurement(id, calls table, add measurementID foreign key)
     FOREIGN KEY (recipeID) REFERENCES recipes(recipeID)
 );
 
