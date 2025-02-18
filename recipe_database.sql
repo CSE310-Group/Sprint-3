@@ -35,6 +35,7 @@ CREATE TABLE steps (
 );
 
 -- Insert measurements
+-- Cups, Teaspoons, Tablespoons
 
 -- Breakfast Category (categoryID = 1)
 INSERT INTO categories (name) VALUES ('Breakfast');
