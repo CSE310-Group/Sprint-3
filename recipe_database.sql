@@ -14,12 +14,14 @@ CREATE TABLE recipes (
     FOREIGN KEY (categoryID) REFERENCES categories(categoryID)
 );
 
+-- Create 'measurements' table
+
 -- Create 'ingredients' table
 CREATE TABLE ingredients (
     ingredientID INT AUTO_INCREMENT PRIMARY KEY,
     recipeID INT,
     name VARCHAR(255) NOT NULL,
-    quantity VARCHAR(100),
+    quantity VARCHAR(100), -- Change to amount(number) and measurement(id, calls table)
     FOREIGN KEY (recipeID) REFERENCES recipes(recipeID)
 );
 
@@ -32,46 +34,24 @@ CREATE TABLE steps (
     FOREIGN KEY (recipeID) REFERENCES recipes(recipeID)
 );
 
+-- Insert measurements
+
 -- Breakfast Category (categoryID = 1)
 INSERT INTO categories (name) VALUES ('Breakfast');
 
 -- ? (recipeID = 1)
 -- Recipe
-INSERT INTO recipes (name, description, servings, categoryID) VALUES ('?', '?', ?, 1);
+INSERT INTO recipes (name, description, servings, categoryID) VALUES ('?', '?', 1, 1);
 -- Ingredients
-INSERT INTO ingredients (recipeID, name, quantity) VALUES (1, '?', '?');
+INSERT INTO ingredients (recipeID, name, quantity) VALUES (1, '?', '?'); -- Edit once table is edited
 -- Steps
 INSERT INTO steps (recipeID, stepNumber, description) VALUES (1, 1, '?');
 
 -- Lunch Category (categoryID = 2)
 INSERT INTO categories (name) VALUES ('Lunch');
 
--- ? (recipeID = 2)
--- Recipe
-INSERT INTO recipes (name, description, servings, categoryID) VALUES ('?', '?', ?, 2)
--- Ingredients
-INSERT INTO ingredients (recipeID, name, quantity) VALUES (2, '?', '?');
--- Steps
-INSERT INTO steps (recipeID, stepNumber, description) VALUES (2, 1, '?');
-
 -- Dinner Category (categoryID = 3)
 INSERT INTO categories (name) VALUES ('Dinner');
 
--- ? (recipeID = 3)
--- Recipe
-INSERT INTO recipes (name, description, servings, categoryID) VALUES ('?', '?', ?, 3);
--- Ingredients
-INSERT INTO ingredients (recipeID, name, quantity) VALUES (3, '?', '?');
--- Steps
-INSERT INTO steps (recipeID, stepNumber, description) VALUES (3, 1, '?');
-
 -- Dessert Category (categoryID = 4)
 INSERT INTO categories (name) VALUES ('Dessert');
-
--- ? (recipeID = 4)
--- Recipe
-INSERT INTO recipes (name, description, servings, categoryID) VALUES ('?', '?', ?, 4);
--- Ingredients
-INSERT INTO ingredients (recipeID, name, quantity) VALUES (4, '?', '?');
--- Steps
-INSERT INTO steps (recipeID, stepNumber, description) VALUES (4, 1, '?');
