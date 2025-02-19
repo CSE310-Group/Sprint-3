@@ -9,20 +9,28 @@ public class conversions {  // Renamed class to follow Java conventions
     // Decimal to Fraction Conversion
     public static String decimalToFraction(double decimal) {
 
-        // Rounds number to nearest .25 for cleaner fractions
-       
+       double roundingAllowance = 0.01;
 
-        double cups = 0.29;
-        if (cups > 0.3 && cups < 0.36 || cups > 0.63 && cups < 0.69){
-            System.out.println("\nWe made it here");
-            
-        } else{ 
+        // Rounds decimals for cleaner fractions
+        if (Math.abs(decimal - (1.0/3)) < roundingAllowance){
+            decimal = 1.0 / 3; 
+        } else if (Math.abs(decimal - (2.0/3)) < roundingAllowance){
+            decimal = 2.0 /3;
+        } else{
             decimal = Math.round(decimal * 4) / 4.0;
-            System.out.println("\nthis is the else");
         }
 
+        // if (cups > 0.3 && cups < 0.36){
+        //     decimal = 1.0 / 3; 
+        // } else if (cups > 0.63 && cups < 0.69){
+        //     decimal = 2.0 /3;
+        // } else{ 
+        //     // Rounds number to nearest .25 for cleaner fractions
+        //     decimal = Math.round(decimal * 4) / 4.0;
+        // }
 
-        int denominator = 100; // A reasonable denominator for precision
+
+        int denominator = 48; // A reasonable denominator for precision
         int numerator = (int) Math.round(decimal * denominator);
 
         // Simplify the fraction to get greatest common denominator 
@@ -105,7 +113,7 @@ public class conversions {  // Renamed class to follow Java conventions
         String tablespoonsFraction = decimalToFraction(toTablespoon);
 
         // Convert cups within cups
-        double wholeCups = .33;
+        double wholeCups = .34;
         // double toHalfCups = wholeCupsToHalfCups(wholeCups);
         String cupFractions = decimalToFraction(wholeCups);
 
@@ -116,19 +124,19 @@ public class conversions {  // Renamed class to follow Java conventions
         // Only convert table to tea when needed 
         if (tablespoons < 0.5){
             
-            System.out.println(teaspoonsFraction + " Teaspoons garlic powder");
+            System.out.println(tablespoons + " tablespoons is equal to " + teaspoonsFraction + " Teaspoons garlic powder");
         }
         else{
-            System.out.println(tablespoonsFraction + " Tablespoons garlic powder");
+            System.out.println(tablespoons + " tablespoons is equal to " + teaspoonsFraction + " Teaspoons garlic powder");
         }
 
         // Only convert tea to table when needed
         if (teaspoons > 2){
-            System.out.println(tablespoonsFraction + " Tablespoons sugar");
+            System.out.println(teaspoons + " teaspoons is equal to " + tablespoonsFraction + " Tablespoons sugar");
         }
 
         // if (wholeCups < 1){
-        System.out.println(wholeCups + "cups = " + cupFractions + " cups");
+        System.out.println(wholeCups + " cups = " + cupFractions + " cups");
         // }
 
     }
