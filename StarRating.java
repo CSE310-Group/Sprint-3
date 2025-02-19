@@ -15,7 +15,7 @@ public class StarRating {
 
         for (int i = 0; i < 5; i++) {
             final int rating = i + 1;
-            stars[i] = new JRadioButton("★");  // Unicode Star Symbol
+            stars[i] = new JRadioButton("*");  // Unicode Star Symbol
             stars[i].setFont(new Font("Arial", Font.BOLD, 20));
             stars[i].setFocusPainted(false);
             stars[i].setBorderPainted(false);

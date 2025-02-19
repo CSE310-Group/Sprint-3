@@ -146,7 +146,7 @@ public class LunchGUI extends JFrame {
     
     
         JPanel starPanel = new StarRating().createStarRatingPanel();
-        recipeFrame.add(starPanel, BorderLayout.SOUTH);
+        recipeFrame.add(starPanel, BorderLayout.NORTH);
        
         
 
