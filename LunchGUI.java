@@ -107,30 +107,53 @@ public class LunchGUI extends JFrame {
         recipeFrame.setSize(400, 300);
         recipeFrame.setLocationRelativeTo(null);
         recipeFrame.setLayout(new BorderLayout());
-
+    
         JTextArea textArea = new JTextArea(description);
         textArea.setFont(new Font("Arial", Font.PLAIN, 14));
         textArea.setEditable(false);
+    
+        JButton halfButton = new JButton("Half");
+        JButton doubleButton = new JButton("Double");
+        halfButton.setFont(new Font("Arial", Font.BOLD, 14));
+        doubleButton.setFont(new Font("Arial", Font.BOLD, 14));
+    
+        // halfButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         String updatedText =conversions.scaleRecipe(textArea.getText(), 0.5);
+        //         textArea.setText(updatedText);
+        //     }
+        // });
+    
+        // doubleButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         String updatedText = conversions.scaleRecipe(textArea.getText(), 2);
+        //         textArea.setText(updatedText);
+        //     }
+        // });
 
-        // Create the convert button
-        JButton convertButton = new JButton("Convert Ingredient");
-        convertButton.setFont(new Font("Arial", Font.BOLD, 14));
-        convertButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Example recipe detail for conversion
-                double ingredientAmount = 3.0; // For example, 3 tablespoons
-                // Convert tablespoons to teaspoons
-                double convertedAmount = conversions.tablespoonsToTeaspoons(ingredientAmount);
-                String result = conversions.decimalToFraction(convertedAmount);
-                JOptionPane.showMessageDialog(recipeFrame, "Converted Amount: " + result + " Teaspoons");
-            }
-        });
 
+    
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(halfButton);
+        buttonPanel.add(doubleButton);
+    
         recipeFrame.add(new JScrollPane(textArea), BorderLayout.CENTER);
-        recipeFrame.add(convertButton, BorderLayout.SOUTH); // Add button to the bottom of the frame
+        recipeFrame.add(buttonPanel, BorderLayout.SOUTH);
         recipeFrame.setVisible(true);
+    
+    
+    
+        JPanel starPanel = new StarRating().createStarRatingPanel();
+        recipeFrame.add(starPanel, BorderLayout.SOUTH);
+       
+        
+
+     
     }
+
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new LunchGUI(null));
