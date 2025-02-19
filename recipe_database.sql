@@ -15,6 +15,11 @@ CREATE TABLE recipes (
 );
 
 -- Create 'measurements' table
+CREATE TABLE measurements (
+    measurementID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    abbreviarion VARCHAR(100) NOT NULL
+);
 
 -- Create 'ingredients' table
 CREATE TABLE ingredients (
@@ -35,7 +40,9 @@ CREATE TABLE steps (
 );
 
 -- Insert measurements
--- Cups, Teaspoons, Tablespoons
+INSERT INTO measurements (name, abbreviarion) VALUES ('Cups', 'c');
+INSERT INTO measurements (name, abbreviarion) VALUES ('Teaspoons', 'tsp');
+INSERT INTO measurements (name, abbreviarion) VALUES ('Tablespoons', 'tbsp');
 
 -- Breakfast Category (categoryID = 1)
 INSERT INTO categories (name) VALUES ('Breakfast');
