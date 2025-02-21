@@ -9,7 +9,7 @@ public class conversions {  // Renamed class to follow Java conventions
     // Decimal to Fraction Conversion
     public static String decimalToFraction(double decimal) {
 
-       double roundingAllowance = 0.01;
+       double roundingAllowance = 0.05;
 
         // Rounds decimals for cleaner fractions
         if (Math.abs(decimal - (1.0/3)) < roundingAllowance){
@@ -20,17 +20,8 @@ public class conversions {  // Renamed class to follow Java conventions
             decimal = Math.round(decimal * 4) / 4.0;
         }
 
-        // if (cups > 0.3 && cups < 0.36){
-        //     decimal = 1.0 / 3; 
-        // } else if (cups > 0.63 && cups < 0.69){
-        //     decimal = 2.0 /3;
-        // } else{ 
-        //     // Rounds number to nearest .25 for cleaner fractions
-        //     decimal = Math.round(decimal * 4) / 4.0;
-        // }
-
-
-        int denominator = 48; // A reasonable denominator for precision
+        // A reasonable denominator 
+        int denominator = 48; 
         int numerator = (int) Math.round(decimal * denominator);
 
         // Simplify the fraction to get greatest common denominator 
@@ -46,7 +37,6 @@ public class conversions {  // Renamed class to follow Java conventions
             numerator = numerator % denominator;
             return whole + " " + numerator + "/" + denominator;
         } 
-       // return (denominator == 1) ? String.valueOf(numerator) : numerator + "/" + denominator;
         return numerator + "/" + denominator;
     }
 
@@ -61,83 +51,80 @@ public class conversions {  // Renamed class to follow Java conventions
     }
 
     // Conversion method: teaspoons, tablespoons, and cups
-    public static double teaspoonsToHalfTeaspoons (double teaspoons){
-        return teaspoons / 2;
-    }
-    public static double teaspoonsToTablespoons(double teaspoons) {
-        return teaspoons / 3;
-    }
-    public static double tablespoonsToTeaspoons(double tablespoons) {
-        return tablespoons * 3;
-    }
+    // public static double teaspoonsToHalfTeaspoons (double teaspoons){
+    //     return teaspoons / 2;
+    // }
+    // public static double teaspoonsToTablespoons(double teaspoons) {
+    //     return teaspoons / 3;
+    // }
+    // public static double tablespoonsToTeaspoons(double tablespoons) {
+    //     return tablespoons * 3;
+    // }
     public static double tablespoonsToCups(double tablespoons){
         return tablespoons * 4;
     }
-    public static double fourthCupsToTablespoons(double fourthCups){
-        return fourthCups / 4;
-    }
-    public static double fourthCupsToHalfCups(double fourthCups){
-        return fourthCups * 2;
-    }
-    public static double halfCupsToFourthCups(double halfCups){
-        return halfCups / 2;
-    }
-    public static double halfCupsToWholeCups(double halfCups){
-        return halfCups * 2;
-    }
-    public static double wholeCupsToHalfCups(double wholeCups){
-        return wholeCups / 2;
-    }
+    // public static double fourthCupsToTablespoons(double wholeCups){
+    //     return wholeCups / 16;
+    // }
     public static double thirdCupsToWholeCups(double thirdCups){
         return thirdCups * 3;
     }
-    public static double wholeCupsToThirdCups(double wholeCups){
-        return wholeCups / 3;
+    public static double wholeCupsToThirdCups(double cups){
+        return cups / 3;
     }
     public static double thirdCupsToTablespoons(double thirdCups){
-        return thirdCups / 5.3;
+        return thirdCups * 2;
     }
-
 
     public static void main(String[] args) {
 
+        // Convert teaspoons to tablespoons when needed
+        double teaspoonsIncrease = 3;
+        double teaToTable = teaspoonsIncrease / 3;
+        String teaToTableFraction = decimalToFraction(teaToTable);  
 
-        // Convert tablespoons to teaspoons in fraction form
-        double tablespoons = .25;
-        double toTeaspoons = tablespoonsToTeaspoons(tablespoons);
-        String teaspoonsFraction = decimalToFraction(toTeaspoons);
-
-        // Convert teaspoons to tablespoons 
-        double teaspoons = 5;
-        double toTablespoon = teaspoonsToTablespoons(teaspoons);
-        String tablespoonsFraction = decimalToFraction(toTablespoon);
-
-        // Convert cups within cups
-        double wholeCups = .34;
-        // double toHalfCups = wholeCupsToHalfCups(wholeCups);
-        String cupFractions = decimalToFraction(wholeCups);
-
-        // Testing to see if it rounds decimals to nearest 25th
-        System.out.println("testign rounding function. input was 2.37 ");
-        System.out.println(decimalToFraction(2.37)); // Expected output: "2 1/4"
-       
-        // Only convert table to tea when needed 
-        if (tablespoons < 0.5){
-            
-            System.out.println(tablespoons + " tablespoons is equal to " + teaspoonsFraction + " Teaspoons garlic powder");
+        // Teaspoon  changes to tablespoon only when they become equivalent: 3 tsp per 1 tbl
+        if (teaspoonsIncrease > 2)System.out.println(teaspoonsIncrease + " tsp ----> " + teaToTableFraction + " tbl");
+        
+        // Otherwise it remains a teaspoon
+        else if (teaspoonsIncrease <= 2){
+            String teaIncreaseFraction = decimalToFraction(teaspoonsIncrease);
+            System.out.println("\n" + teaIncreaseFraction + " tsp");
         }
+        else System.out.println("Something is wrong with the teaspoon-tablespoon conversion");
+
+        // Convert tablespoons to teaspoons when needed
+        double tablespoonsDecrease = .25;
+        double tableToTea = tablespoonsDecrease * 3;
+        String tableToTeaFraction = decimalToFraction(tableToTea);
+        if (tablespoonsDecrease < 0.5)System.out.println("\n" + tablespoonsDecrease + " tbl ----> " + tableToTeaFraction + " tsp");
+        else if (tablespoonsDecrease <= 0.5){
+            String tableDecreaseFraction = decimalToFraction(tablespoonsDecrease);
+            System.out.println("\n" + tableDecreaseFraction + " tbl");
+        }
+        else System.out.println("Something is wrong with the tablespoon-teaspoon conversion");
+
+        // Convert cups to tablespoons when needed
+        double cups = .62;
+        double cupToTable = cups * 16;
+        String cupToTableFraction = decimalToFraction(cupToTable);
+        if (cups < .25) System.out.println("\n" + cups + " cups ----> " + cupToTableFraction + " tbl");
         else{
-            System.out.println(tablespoons + " tablespoons is equal to " + teaspoonsFraction + " Teaspoons garlic powder");
+            String cupFractions = decimalToFraction(cups);
+            System.out.println("\n" + cups + " cups ----> " + cupFractions + " cups");      
         }
 
-        // Only convert tea to table when needed
-        if (teaspoons > 2){
-            System.out.println(teaspoons + " teaspoons is equal to " + tablespoonsFraction + " Tablespoons sugar");
-        }
+        double tablespoonsIncrease = 7;
+        double tableToCup = tablespoonsIncrease / 16;
+        String tableToCupFraction = decimalToFraction(tableToCup);
+        if (tablespoonsIncrease > 3) System.out.println("\n" + tablespoonsIncrease + " tbl ----> " + tableToCupFraction + " cups");
+        
 
-        // if (wholeCups < 1){
-        System.out.println(wholeCups + " cups = " + cupFractions + " cups");
-        // }
 
+        // Testing to see if it rounds decimals to nearest 1/4th or 1/3rd
+        System.out.println("testign rounding function. input was 2.37 ");
+        System.out.println(decimalToFraction(2.37) + " expected output: 2 1/4"); // Expected output: "2 1/4"
+       
+     
     }
 }
