@@ -26,8 +26,10 @@ CREATE TABLE ingredients (
     ingredientID INT AUTO_INCREMENT PRIMARY KEY,
     recipeID INT,
     name VARCHAR(255) NOT NULL,
-    quantity VARCHAR(100), -- Change to amount(number) and measurement(id, calls table, add measurementID foreign key)
-    FOREIGN KEY (recipeID) REFERENCES recipes(recipeID)
+    quantity DECIMAL NOT NULL,
+    measurementID INT,
+    FOREIGN KEY (recipeID) REFERENCES recipes(recipeID),
+    FOREIGN KEY (measurementID) REFERENCES measurements(measurementID)
 );
 
 -- Create 'steps' table
@@ -51,7 +53,7 @@ INSERT INTO categories (name) VALUES ('Breakfast');
 -- Recipe
 INSERT INTO recipes (name, description, servings, categoryID) VALUES ('?', '?', 1, 1);
 -- Ingredients
-INSERT INTO ingredients (recipeID, name, quantity) VALUES (1, '?', '?'); -- Edit once table is edited
+INSERT INTO ingredients (recipeID, name, quantity) VALUES (1, '?', 1.0, 1);
 -- Steps
 INSERT INTO steps (recipeID, stepNumber, description) VALUES (1, 1, '?');
 
