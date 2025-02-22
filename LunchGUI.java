@@ -100,6 +100,20 @@ public class LunchGUI extends JFrame {
 
         panel.revalidate();
         panel.repaint();
+
+        // Jbutton CreateRecipeButton = new Jbutton("Create Recipe");
+        // CreateRecipeButton.setFont(new Font("Arial", Font.BOLD, 14));
+        // CreateRecipeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // panel.add(CreateRecipeButton);        
+        // panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // CreateRecipeButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         CreateRecipeGUI CreateRecipe = new CreateRecipeGUI();
+        //         CreateRecipe.setVisible(true);
+        //     }
+        // });
     }
 
     private void openRecipeWindow(String name, String description) {
@@ -148,10 +162,10 @@ public class LunchGUI extends JFrame {
         JPanel starPanel = new StarRating().createStarRatingPanel();
         recipeFrame.add(starPanel, BorderLayout.NORTH);
        
-        
 
-     
+
     }
+
 
     
 
