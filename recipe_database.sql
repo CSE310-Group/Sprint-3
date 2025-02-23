@@ -1,3 +1,10 @@
+-- Create 'users' table
+CREATE TABLE users (
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
+)
+
 -- Create 'categories' table
 CREATE TABLE categories (
     categoryID INT AUTO_INCREMENT PRIMARY KEY,
