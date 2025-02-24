@@ -18,7 +18,7 @@ List of libraries included to the project:
 - [java.sql]
 - [java.util.ArrayList]
 - [java.util.Scanner]
-- [java.swing]
+- [javax.swing]
 - [java.awt]
 
 # Useful Websites
@@ -43,6 +43,6 @@ Lily Brown: Set up database and tables in MySQL
 
 Lily Sorensen: Create functions for conversion between cooking units
 
-Tyler: Create GUI
+Tylar: Create GUI
 
 Hyrum: Connect database to GUI
