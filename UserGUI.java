@@ -47,7 +47,10 @@ class UserGUI extends JFrame {
         String password = new String(passwordField.getPassword());
         for (User user : users.getUserList()) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                users.setCurrentUser(user);
                 JOptionPane.showMessageDialog(this, "Login Successful!");
+                this.dispose(); // Close login window
+                new MainGUI(users.getCurrentUser()); // Launch main GUI
                 return;
             }
         }
@@ -66,3 +69,14 @@ class UserGUI extends JFrame {
     }
 }
 
+class MainGUI extends JFrame {
+    public MainGUI(User user) {
+        setTitle("Main Application - Welcome " + user.getUsername());
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        JLabel welcomeLabel = new JLabel("Welcome, " + user.getUsername() + "!");
+        add(welcomeLabel);
+        setVisible(true);
+    }
+}

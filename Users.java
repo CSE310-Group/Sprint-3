@@ -2,13 +2,10 @@ import java.io.*;
 import java.util.*;
 import java.util.List;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
 public class Users {
     private List<User> userList;
     private static final String FILE_NAME = "users.txt";
+    private User currentUser;
 
     public Users() {
         userList = new ArrayList<>();
@@ -35,12 +32,6 @@ public class Users {
     }
 
     public void addUser(String username, String password) {
-        for (User user : userList) {
-            if (user.getUsername().equals(username)) {
-                JOptionPane.showMessageDialog(null, "User already exists, please login.");
-                return;
-            }
-        }
         int newUserId = userList.isEmpty() ? 1 : userList.get(userList.size() - 1).getUserId() + 1;
         User newUser = new User(username, password, newUserId);
         userList.add(newUser);
@@ -73,5 +64,13 @@ public class Users {
             }
         }
         return false;
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 }
