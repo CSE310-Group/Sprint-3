@@ -45,7 +45,7 @@ class UserGUI extends JFrame {
     private void loginUser() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
-        for (User user : users.userList) {
+        for (User user : users.getUserList()) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 JOptionPane.showMessageDialog(this, "Login Successful!");
                 return;
@@ -57,7 +57,12 @@ class UserGUI extends JFrame {
     private void registerUser() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
-        users.addUser(username, password);
-        JOptionPane.showMessageDialog(this, "Registration Successful!");
+        
+        if (users.userExists(username)) {
+            JOptionPane.showMessageDialog(this, "User already exists, please login.");
+        } else {
+            users.addUser(username, password);
+        }
     }
 }
+

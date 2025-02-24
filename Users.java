@@ -61,4 +61,17 @@ public class Users {
             System.out.println(user);
         }
     }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public boolean userExists(String username) {
+        for (User user : userList) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
