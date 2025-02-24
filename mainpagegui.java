@@ -2,11 +2,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class mainpagegui extends JFrame {
+public class MainPageGUI extends JFrame {
     private JPanel panel;
     private Recipes recipes; // Shared Recipes object
 
-    public mainpagegui(Recipes recipes) {
+    public MainPageGUI(Recipes recipes) {
+        setVisible(true);
+
         this.recipes = recipes; // Store the shared Recipes instance
 
         setTitle("Recipe Categories");
@@ -48,8 +50,11 @@ public class mainpagegui extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Open the CreateRecipeGUI and pass the shared recipes
-                RecipieCreate createRecipeGUI = new RecipieCreate(recipes);
+                RecipieCreate createRecipeGUI = new RecipieCreate(recipes, MainPageGUI.this);
                 createRecipeGUI.setVisible(true);
+                setVisible(false);
+
+                createRecipeGUI.setVisible(true);      
             }
         });
         panel.add(createRecipeButton);
@@ -76,15 +81,15 @@ public class mainpagegui extends JFrame {
                 try {
                     JFrame targetFrame;
                     if (targetClass == BreakfastGUI.class) {
-                        targetFrame = new BreakfastGUI(mainpagegui.this);
+                        targetFrame = new BreakfastGUI(MainPageGUI.this);
                     } else if (targetClass == LunchGUI.class) {
-                        targetFrame = new LunchGUI(mainpagegui.this);
+                        targetFrame = new LunchGUI(MainPageGUI.this);
                     } else if (targetClass == DinnerGUI.class) {
-                        targetFrame = new DinnerGUI(mainpagegui.this);
+                        targetFrame = new DinnerGUI(MainPageGUI.this);
                     } else if (targetClass == DessertGUI.class) {
-                        targetFrame = new DessertGUI(mainpagegui.this);
+                        targetFrame = new DessertGUI(MainPageGUI.this);
                     } else {
-                        targetFrame = targetClass.getDeclaredConstructor(mainpagegui.class).newInstance(mainpagegui.this);
+                        targetFrame = targetClass.getDeclaredConstructor(MainPageGUI.class).newInstance(MainPageGUI.this);
                     }
                     targetFrame.setVisible(true);
                     setVisible(false); // Hide main page when opening a new window
@@ -101,7 +106,7 @@ public class mainpagegui extends JFrame {
     public static void main(String[] args) {
         Recipes recipes = new Recipes(); // Create shared Recipes object
         SwingUtilities.invokeLater(() -> {
-            mainpagegui frame = new mainpagegui(recipes); // Pass the shared Recipes object
+            MainPageGUI frame = new MainPageGUI(recipes); // Pass the shared Recipes object
             frame.setVisible(true);
         });
     }

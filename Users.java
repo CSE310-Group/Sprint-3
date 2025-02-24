@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
-import java.util.List;
+
+import javax.swing.JOptionPane;
 
 public class Users {
     private List<User> userList;
@@ -21,7 +22,8 @@ public class Users {
                     int id = Integer.parseInt(parts[0]);
                     String username = parts[1];
                     String password = parts[2];
-                    userList.add(new User(username, password, id));
+                    User user = new User(username, password, id);
+                    userList.add(user);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -29,28 +31,63 @@ public class Users {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        loadCurrentUser(); // Load the last logged-in user
     }
 
     public void addUser(String username, String password) {
         int newUserId = userList.isEmpty() ? 1 : userList.get(userList.size() - 1).getUserId() + 1;
         User newUser = new User(username, password, newUserId);
         userList.add(newUser);
-        saveUserToFile(newUser);
+        saveUsersToFile();
         JOptionPane.showMessageDialog(null, "Registration Successful!");
     }
 
-    private void saveUserToFile(User user) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
-            writer.write(user.toString() + "\n");
+    private void saveUsersToFile() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (User user : userList) {
+                writer.write(user.toString() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        saveCurrentUser(); // Ensure current user is saved
+    }
+
+    private void saveCurrentUser() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("current_user.txt"))) {
+            if (currentUser != null) {
+                writer.write(currentUser.getUsername());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void printAllUsers() {
-        for (User user : userList) {
-            System.out.println(user);
+    private void loadCurrentUser() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("current_user.txt"))) {
+            String username = reader.readLine();
+            if (username != null) {
+                for (User user : userList) {
+                    if (user.getUsername().equals(username)) {
+                        currentUser = user;
+                        break;
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("No previously logged-in user.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+        saveCurrentUser();
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     public List<User> getUserList() {
@@ -64,13 +101,5 @@ public class Users {
             }
         }
         return false;
-    }
-
-    public void setCurrentUser(User user) {
-        this.currentUser = user;
-    }
-
-    public User getCurrentUser() {
-        return currentUser;
     }
 }
