@@ -34,7 +34,7 @@ public class mainpagegui extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
-        scrollPane.getViewport().setBackground(Color.decode("#f5deb3"));
+        scrollPane.getViewport().setBackground(Color.decode("#F5FFda"));
 
         // ADD create recipe button
         JLabel createRecipeButton = new JLabel("Create Recipe");

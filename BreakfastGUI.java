@@ -12,7 +12,7 @@ public class BreakfastGUI extends JFrame {
     public BreakfastGUI(JFrame mainPage) {
         this.mainPage = mainPage; // Store reference to mainpagegui
 
-        setTitle("Lunch Recipes"); // Correct title
+        setTitle("Breakfast Recipes"); // Correct title
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 600);
         setLocationRelativeTo(null);
@@ -41,7 +41,7 @@ public class BreakfastGUI extends JFrame {
         panel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacing
 
         // Add title
-        JLabel title = new JLabel("All Lunch Recipes");
+        JLabel title = new JLabel("All Breakfast Recipes");
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(title);
@@ -59,9 +59,9 @@ public class BreakfastGUI extends JFrame {
     private void loadRecipes() {
         // Dummy recipe data for testing
         String[][] sampleRecipes = {
-            {"Caesar Salad", "1. Chop lettuce.\n2. Add dressing and croutons...", null},
-            {"Grilled Cheese", "1. Butter bread.\n2. Add cheese and grill...", null},
-            {"Pasta Primavera", "1. Cook pasta.\n2. Add veggies and sauce...", null}
+          {"Pancakes", null, null},
+          {"Omelette", null, null},
+          {"Scrambled Eggs", null, null}
         };
 
         for (String[] recipe : sampleRecipes) {

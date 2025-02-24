@@ -12,7 +12,7 @@ public class DessertGUI extends JFrame {
     public DessertGUI(JFrame mainPage) {
         this.mainPage = mainPage; // Store reference to mainpagegui
 
-        setTitle("Lunch Recipes"); // Correct title
+        setTitle("Dessert Recipes"); // Correct title
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 600);
         setLocationRelativeTo(null);
@@ -41,7 +41,7 @@ public class DessertGUI extends JFrame {
         panel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacing
 
         // Add title
-        JLabel title = new JLabel("All Lunch Recipes");
+        JLabel title = new JLabel("All Dessert Recipes");
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(title);
@@ -59,9 +59,9 @@ public class DessertGUI extends JFrame {
     private void loadRecipes() {
         // Dummy recipe data for testing
         String[][] sampleRecipes = {
-            {"Caesar Salad", "1. Chop lettuce.\n2. Add dressing and croutons...", null},
-            {"Grilled Cheese", "1. Butter bread.\n2. Add cheese and grill...", null},
-            {"Pasta Primavera", "1. Cook pasta.\n2. Add veggies and sauce...", null}
+                {"Cake", "1. Boil water.\n2. Cook pasta.", null},
+                {"Ice Cream", "1. Boil water.\n2. Cook pasta.", null},
+                {"Donut", "1. Boil water.\n2. Cook pasta.", null}
         };
 
         for (String[] recipe : sampleRecipes) {
