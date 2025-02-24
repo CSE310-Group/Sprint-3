@@ -1,33 +1,18 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-
 public class BreakfastGUI extends JFrame {
     private JPanel panel;
-    private JFrame mainPage;
+    private JFrame mainPage; // Reference to mainpagegui
 
     public BreakfastGUI(JFrame mainPage) {
-        this.mainPage = mainPage;
+        this.mainPage = mainPage; // Store reference to mainpagegui
 
-        setTitle("Breakfast Recipes");
+        setTitle("Lunch Recipes"); // Correct title
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 600);
         setLocationRelativeTo(null);
@@ -42,33 +27,41 @@ public class BreakfastGUI extends JFrame {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getViewport().setBackground(Color.decode("#f5deb3"));
 
+        // Add Back Button
         JButton backButton = new JButton("Back to Main Menu");
         backButton.setFont(new Font("Arial", Font.BOLD, 14));
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        backButton.addActionListener(e -> goBackToMainPage());
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                goBackToMainPage();
+            }
+        });
         panel.add(backButton);
-        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacing
 
-        JLabel title = new JLabel("All Breakfast Recipes");
+        // Add title
+        JLabel title = new JLabel("All Lunch Recipes");
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(title);
-        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacing
 
         add(scrollPane);
         loadRecipes();
     }
 
     private void goBackToMainPage() {
-        this.dispose();
-        mainPage.setVisible(true);
+        this.dispose(); // Close the current window
+        mainPage.setVisible(true); // Show mainpagegui
     }
 
     private void loadRecipes() {
+        // Dummy recipe data for testing
         String[][] sampleRecipes = {
-            {"Pancakes", "1. Mix ingredients.\n2. Cook on skillet...", null},
-            {"Omelette", "1. Beat eggs.\n2. Cook with fillings...", null},
-            {"Smoothie", "1. Blend fruits.\n2. Serve chilled...", null}
+            {"Caesar Salad", "1. Chop lettuce.\n2. Add dressing and croutons...", null},
+            {"Grilled Cheese", "1. Butter bread.\n2. Add cheese and grill...", null},
+            {"Pasta Primavera", "1. Cook pasta.\n2. Add veggies and sauce...", null}
         };
 
         for (String[] recipe : sampleRecipes) {
@@ -89,8 +82,11 @@ public class BreakfastGUI extends JFrame {
         JLabel descLabel = new JLabel("<html><p style='width:300px;'>" + description + "</p></html>");
         descLabel.setFont(new Font("Arial", Font.PLAIN, 14));
 
+        JLabel imageLabel = new JLabel("No Image Available", SwingConstants.CENTER);
+
         recipePanel.add(titleLabel, BorderLayout.NORTH);
-        recipePanel.add(descLabel, BorderLayout.CENTER);
+        recipePanel.add(imageLabel, BorderLayout.CENTER);
+        recipePanel.add(descLabel, BorderLayout.SOUTH);
 
         recipePanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -100,10 +96,24 @@ public class BreakfastGUI extends JFrame {
         });
 
         panel.add(recipePanel);
-        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Spacing
 
         panel.revalidate();
         panel.repaint();
+
+        // Jbutton CreateRecipeButton = new Jbutton("Create Recipe");
+        // CreateRecipeButton.setFont(new Font("Arial", Font.BOLD, 14));
+        // CreateRecipeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // panel.add(CreateRecipeButton);        
+        // panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // CreateRecipeButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         CreateRecipeGUI CreateRecipe = new CreateRecipeGUI();
+        //         CreateRecipe.setVisible(true);
+        //     }
+        // });
     }
 
     private void openRecipeWindow(String name, String description) {
@@ -111,26 +121,55 @@ public class BreakfastGUI extends JFrame {
         recipeFrame.setSize(400, 300);
         recipeFrame.setLocationRelativeTo(null);
         recipeFrame.setLayout(new BorderLayout());
-
+    
         JTextArea textArea = new JTextArea(description);
         textArea.setFont(new Font("Arial", Font.PLAIN, 14));
         textArea.setEditable(false);
+    
+        JButton halfButton = new JButton("Half");
+        JButton doubleButton = new JButton("Double");
+        halfButton.setFont(new Font("Arial", Font.BOLD, 14));
+        doubleButton.setFont(new Font("Arial", Font.BOLD, 14));
+    
+        // halfButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         String updatedText =conversions.scaleRecipe(textArea.getText(), 0.5);
+        //         textArea.setText(updatedText);
+        //     }
+        // });
+    
+        // doubleButton.addActionListener(new ActionListener() {
+        //     @Override
+        //     public void actionPerformed(ActionEvent e) {
+        //         String updatedText = conversions.scaleRecipe(textArea.getText(), 2);
+        //         textArea.setText(updatedText);
+        //     }
+        // });
 
-        JButton convertButton = new JButton("Convert Ingredient");
-        convertButton.setFont(new Font("Arial", Font.BOLD, 14));
-        convertButton.addActionListener(e -> {
-            double ingredientAmount = 3.0; // Example amount
-            double convertedAmount = conversions.tablespoonsToTeaspoons(ingredientAmount);
-            String result = conversions.decimalToFraction(convertedAmount);
-            JOptionPane.showMessageDialog(recipeFrame, "Converted Amount: " + result + " Teaspoons");
-        });
 
+    
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(halfButton);
+        buttonPanel.add(doubleButton);
+    
         recipeFrame.add(new JScrollPane(textArea), BorderLayout.CENTER);
-        recipeFrame.add(convertButton, BorderLayout.SOUTH);
+        recipeFrame.add(buttonPanel, BorderLayout.SOUTH);
         recipeFrame.setVisible(true);
+    
+    
+    
+        JPanel starPanel = new StarRating().createStarRatingPanel();
+        recipeFrame.add(starPanel, BorderLayout.NORTH);
+       
+
+
     }
 
+
+    
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new BreakfastGUI(null));
+        SwingUtilities.invokeLater(() -> new LunchGUI(null));
     }
 }

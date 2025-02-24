@@ -36,6 +36,22 @@ public class mainpagegui extends JFrame {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         scrollPane.getViewport().setBackground(Color.decode("#f5deb3"));
 
+        // ADD create recipe button
+        JLabel createRecipeButton = new JLabel("Create Recipe");
+        createRecipeButton.setFont(new Font("Arial", Font.BOLD, 18));
+        createRecipeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        createRecipeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        createRecipeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Open the CreateRecipeGUI
+                CreateRecipeGUI createRecipeGUI = new CreateRecipeGUI();
+                createRecipeGUI.setVisible(true);
+            }
+        });
+        panel.add(createRecipeButton);
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
         // Add title
         JLabel title = new JLabel("Meal Categories");
         title.setFont(new Font("Arial", Font.BOLD, 24));
