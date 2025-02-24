@@ -96,4 +96,5 @@ public class LoginpageGUI extends JFrame {
       
             }
         });
+    }
 }

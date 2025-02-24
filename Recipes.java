@@ -37,4 +37,7 @@ class Recipes {
             e.printStackTrace();
         }
     }
+    public List<Recipe> getRecipes() {
+        return recipeList;
+    }
 }

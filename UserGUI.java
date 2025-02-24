@@ -52,7 +52,7 @@ class UserGUI extends JFrame {
                 this.dispose(); // Close login window
                 users.setCurrentUser(user); // Set current user after login
                 SwingUtilities.invokeLater(() -> {
-                    MainPageGUI mainPage = new MainPageGUI(recipes);
+                    MainPageGUI mainPage = new MainPageGUI(recipes,users);
                     mainPage.setVisible(true);
                 });
                 return;

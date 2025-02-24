@@ -10,7 +10,7 @@ class UserGUI extends JFrame {
     private JButton loginButton, registerButton;
     private Users users;
 
-    public UserGUI(Users users, Recipes recipes) {
+    public UserGUI(Recipes recipes, Users users) {
         this.users = users;
         setTitle("User Login/Register");
         setSize(300, 200);
@@ -50,7 +50,7 @@ class UserGUI extends JFrame {
                 JOptionPane.showMessageDialog(this, "Login Successful!");
                 this.dispose(); // Close login window
                 Recipes recipes = new Recipes(); // Create Recipes instance
-                new MainPageGUI(recipes); // Launch MainPageGUI with Recipes
+                new MainPageGUI(recipes, users); // Launch MainPageGUI with Recipes
                 return;
             }
         }
