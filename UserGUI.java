@@ -1,31 +1,25 @@
+import javax.swing.JFrame;
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class UserGUI extends JFrame {
+class UserGUI extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private JTextField userIdField;
-    private JButton submitButton;
-    private JButton loginButton;
+    private JButton loginButton, registerButton;
     private Users users;
-    private Recipes recipies;
 
-    public UserGUI(Users users, Recipes recipies) {
-        this.recipies = recipies;
+    public UserGUI(Users users) {
         this.users = users;
-        setTitle("User Login & Registration");
-        setSize(300, 250);
+        setTitle("User Login/Register");
+        setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 2));
 
-        panel.add(new JLabel("User ID:"));
-        userIdField = new JTextField();
-        panel.add(userIdField);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2, 5, 5));
 
         panel.add(new JLabel("Username:"));
         usernameField = new JTextField();
@@ -35,49 +29,35 @@ public class UserGUI extends JFrame {
         passwordField = new JPasswordField();
         panel.add(passwordField);
 
-        submitButton = new JButton("Register");
         loginButton = new JButton("Login");
+        registerButton = new JButton("Register");
 
-        panel.add(submitButton);
+        loginButton.addActionListener(e -> loginUser());
+        registerButton.addActionListener(e -> registerUser());
+
         panel.add(loginButton);
+        panel.add(registerButton);
 
         add(panel);
-
-        submitButton.addActionListener(e -> registerUser());
-        loginButton.addActionListener(e -> loginUser());
-    }
-
-    private void registerUser() {
-        try {
-            int userId = Integer.parseInt(userIdField.getText());
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
-            
-            if (username.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Username and Password cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            users.addUser(new User(username, password, userId));
-            JOptionPane.showMessageDialog(this, "User registered successfully!");
-            userIdField.setText("");
-            usernameField.setText("");
-            passwordField.setText("");
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "User ID must be a number!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        setVisible(true);
     }
 
     private void loginUser() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());
-
-        if (users.authenticateUser(username, password)) {
-            JOptionPane.showMessageDialog(this, "Login Successful!");
-            this.dispose(); // Close the login window
-            SwingUtilities.invokeLater(() -> new mainpagegui(recipies).setVisible(true)); // Open the main GUI
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid Username or Password!", "Error", JOptionPane.ERROR_MESSAGE);
+        for (User user : users.userList) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                JOptionPane.showMessageDialog(this, "Login Successful!");
+                return;
+            }
         }
+        JOptionPane.showMessageDialog(this, "Invalid Credentials");
+    }
+
+    private void registerUser() {
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
+        users.addUser(username, password);
+        JOptionPane.showMessageDialog(this, "Registration Successful!");
     }
 }
