@@ -30,6 +30,7 @@ private String Message;
 
    frame.add(CreationPanel);
  }
+ 
 
    public Frame getFrame() {
        return frame;

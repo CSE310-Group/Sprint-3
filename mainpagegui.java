@@ -34,7 +34,23 @@ public class mainpagegui extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
-        scrollPane.getViewport().setBackground(Color.decode("#f5deb3"));
+        scrollPane.getViewport().setBackground(Color.decode("#F5FFda"));
+
+        // ADD create recipe button
+        JLabel createRecipeButton = new JLabel("Create Recipe");
+        createRecipeButton.setFont(new Font("Arial", Font.BOLD, 18));
+        createRecipeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        createRecipeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        createRecipeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Open the CreateRecipeGUI
+                CreateRecipeGUI createRecipeGUI = new CreateRecipeGUI();
+                createRecipeGUI.setVisible(true);
+            }
+        });
+        panel.add(createRecipeButton);
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         // Add title
         JLabel title = new JLabel("Meal Categories");
@@ -48,6 +64,7 @@ public class mainpagegui extends JFrame {
         panel.add(createCategoryPanel("Lunch", LunchGUI.class));
         panel.add(createCategoryPanel("Dinner", DinnerGUI.class));
         panel.add(createCategoryPanel("Dessert", DessertGUI.class));
+        panel.add(createCategoryPanel("Create Recipe", RecipieCreate.class));
         
         add(scrollPane);
     }
