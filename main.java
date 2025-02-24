@@ -12,7 +12,7 @@ public class main {
         // Pass recipes object to mainpagegui
         Users users = new Users();
         SwingUtilities.invokeLater(() -> {
-            new UserGUI(users,recipes).setVisible(true);
+            new UserGUI(users).setVisible(true);
         });
     }
 }
