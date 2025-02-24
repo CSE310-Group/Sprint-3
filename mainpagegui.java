@@ -2,13 +2,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import javax.swing.SwingUtilities;
+
 public class MainPageGUI extends JFrame {
     private Recipes recipes;
-    private Users users;
 
-    public MainPageGUI(Recipes recipes, Users users) {
+    public MainPageGUI(Recipes recipes) {
         this.recipes = recipes;
-        this.users = users;
+        
         setTitle("Main Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 500);
@@ -62,10 +63,14 @@ public class MainPageGUI extends JFrame {
     }
 
     private void switchUser() {
-        dispose();
-        new UserGUI(recipes, new Users());
-    }
-
-
+    dispose();
+    new UserGUI();
 }
+
+    public static void main(String[] args) {
+        Recipes recipes = new Recipes();
+        SwingUtilities.invokeLater(() -> new MainPageGUI(recipes).setVisible(true));
+    }
+}
+
 
