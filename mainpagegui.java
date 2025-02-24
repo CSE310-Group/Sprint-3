@@ -64,6 +64,7 @@ public class mainpagegui extends JFrame {
         panel.add(createCategoryPanel("Lunch", LunchGUI.class));
         panel.add(createCategoryPanel("Dinner", DinnerGUI.class));
         panel.add(createCategoryPanel("Dessert", DessertGUI.class));
+        panel.add(createCategoryPanel("Create Recipe", RecipieCreate.class));
         
         add(scrollPane);
     }
