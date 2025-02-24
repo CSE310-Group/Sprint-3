@@ -94,5 +94,6 @@ public class LoginpageGUI extends JFrame {
             public void mouseClicked(MouseEvent e) {
             goBackToMainPage();
       
-    
+            }
+        });
 }
