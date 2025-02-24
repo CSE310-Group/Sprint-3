@@ -1,4 +1,3 @@
-import javax.swing.JFrame;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -10,9 +9,11 @@ class UserGUI extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton, registerButton;
     private Users users;
+    private Recipes recipes;
 
-    public UserGUI(Users users) {
+    public UserGUI(Users users, Recipes recipes) {
         this.users = users;
+        this.recipes = recipes;
         setTitle("User Login/Register");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,10 +48,13 @@ class UserGUI extends JFrame {
         String password = new String(passwordField.getPassword());
         for (User user : users.getUserList()) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                users.setCurrentUser(user);
                 JOptionPane.showMessageDialog(this, "Login Successful!");
                 this.dispose(); // Close login window
-                new MainGUI(users.getCurrentUser()); // Launch main GUI
+                users.setCurrentUser(user); // Set current user after login
+                SwingUtilities.invokeLater(() -> {
+                    MainPageGUI mainPage = new MainPageGUI(recipes);
+                    mainPage.setVisible(true);
+                });
                 return;
             }
         }
@@ -69,14 +73,3 @@ class UserGUI extends JFrame {
     }
 }
 
-class MainGUI extends JFrame {
-    public MainGUI(User user) {
-        setTitle("Main Application - Welcome " + user.getUsername());
-        setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        JLabel welcomeLabel = new JLabel("Welcome, " + user.getUsername() + "!");
-        add(welcomeLabel);
-        setVisible(true);
-    }
-}

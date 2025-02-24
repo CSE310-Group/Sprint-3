@@ -10,7 +10,7 @@ class UserGUI extends JFrame {
     private JButton loginButton, registerButton;
     private Users users;
 
-    public UserGUI(Users users) {
+    public UserGUI(Users users, Recipes recipes) {
         this.users = users;
         setTitle("User Login/Register");
         setSize(300, 200);
@@ -46,7 +46,11 @@ class UserGUI extends JFrame {
         String password = new String(passwordField.getPassword());
         for (User user : users.getUserList()) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                users.setCurrentUser(user);
                 JOptionPane.showMessageDialog(this, "Login Successful!");
+                this.dispose(); // Close login window
+                Recipes recipes = new Recipes(); // Create Recipes instance
+                new MainPageGUI(recipes); // Launch MainPageGUI with Recipes
                 return;
             }
         }
@@ -59,9 +63,8 @@ class UserGUI extends JFrame {
         
         if (users.userExists(username)) {
             JOptionPane.showMessageDialog(this, "User already exists, please login.");
-            return;
+        } else {
+            users.addUser(username, password);
         }
-        
-        users.addUser(username, password);
     }
 }
