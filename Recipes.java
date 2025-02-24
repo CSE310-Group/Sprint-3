@@ -1,16 +1,27 @@
 import java.util.ArrayList;
 import java.util.List;
-public class Recipes {
-    private List<Recipe> recipes;
+
+ class Recipes {
+    private List<Recipe> recipeList;
+
     public Recipes() {
-        recipes = new ArrayList<Recipe>();
+        recipeList = new ArrayList<>();
     }
+
     public void addRecipe(Recipe recipe) {
-        recipes.add(recipe);
+        recipeList.add(recipe);
+        System.out.println("Recipe added: " + recipe.getName());
     }
-    public List<Recipe> getRecipes() {
-        return recipes;
+
+    public void printAllRecipes() {
+        System.out.println("\nAll Recipes:");
+        for (Recipe recipe : recipeList) {
+            recipe.printRecipe();
+            System.out.println("-------------------");
+        }
     }
-   
-    
+
+    public List<Recipe> getRecipeList() {
+        return recipeList;
+    }
 }
