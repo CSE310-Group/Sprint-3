@@ -82,40 +82,57 @@ public class conversions {  // Renamed class to follow Java conventions
         String finalUnit;
 
         // Determines what type of conversion to do
+        
         if (unit.equals("tsp")){
+
+            // teaspoons to tablespoon
             if (amount >= 3){
                 finalUnit = "tbl";
                 finalAmount = teaToTableFraction;
             } 
+
+            // Remains teaspoons
             else{
                 finalAmount = teaFraction;
                 finalUnit = unit;
             }
         } 
+
+        // tablespoon to teaspoon
         else if (unit == "tbl"){
             if (amount <= 0.25){
                 finalUnit = "tsp";
                 finalAmount = tableToTeaFraction;
             } 
+
+            // tablespoon to cup
             else if (amount >= 4){
                 finalUnit = "cup";
                 finalAmount = tableToCupFraction;
             }
+
+            // Remains tablespoon
             else{
                 finalUnit = unit;
                 finalAmount = tableFraction;
             } 
         } 
+
+        // cup to tablespoon
         else if (unit == "cup"){
             if (amount < 0.25){
                 finalUnit = "tbl";
                 finalAmount = cupToTableFraction;
             }
+
+            // Remains cup
             else{
                 finalUnit = unit;
                 finalAmount = cupFraction;
             }
         }
+
+        // Remains origional unit
         else{
             finalAmount = amount + "";
             finalUnit = unit;
@@ -131,6 +148,8 @@ public class conversions {  // Renamed class to follow Java conventions
 
     public static void main(String[] args) {
 
+        // Demonstrate the rounding and fraction aspect 
+        System.out.println("\nDemonstrate the rounding and fraction aspect ");
         System.out.println(String.join(" ", getReadableQuantity(1.00, "cup")));
         System.out.println(String.join(" ", getReadableQuantity(1.05, "cup")));
         System.out.println(String.join(" ", getReadableQuantity(1.1, "cup")));
@@ -151,6 +170,18 @@ public class conversions {  // Renamed class to follow Java conventions
         System.out.println(String.join(" ", getReadableQuantity(1.90, "cup")));
         System.out.println(String.join(" ", getReadableQuantity(1.95, "cup")));
         System.out.println(String.join(" ", getReadableQuantity(2.00, "cup")));
+
+        // Demonstrate teaspoon 
+        System.out.println("\nDemo ");
+        System.out.println(String.join(" ", getReadableQuantity(3.5, "tsp")));
+     
+
+
+
+
+
+
+
         
     }
 }
