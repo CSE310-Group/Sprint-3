@@ -128,6 +128,23 @@ public class DessertGUI extends JFrame {
     
         JButton halfButton = new JButton("Half");
         JButton doubleButton = new JButton("Double");
+
+        halfButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String updatedText = conversions.half(textArea.getText(), 0.5);
+                textArea.setText(updatedText);
+            }
+        });
+    
+        doubleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String updatedText = conversions.doubleRecipe(textArea.getText(), 2);
+                textArea.setText(updatedText);
+            }
+        });
+
         halfButton.setFont(new Font("Arial", Font.BOLD, 14));
         doubleButton.setFont(new Font("Arial", Font.BOLD, 14));
     

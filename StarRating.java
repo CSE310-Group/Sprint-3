@@ -10,31 +10,44 @@ public class StarRating {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        ButtonGroup starGroup = new ButtonGroup();
-        JRadioButton[] stars = new JRadioButton[5];
+        // Create an array to hold the star buttons
+        JButton[] stars = new JButton[5];
 
         for (int i = 0; i < 5; i++) {
             final int rating = i + 1;
-            stars[i] = new JRadioButton("*");  // Unicode Star Symbol
-            stars[i].setFont(new Font("Arial", Font.BOLD, 20));
+            stars[i] = new JButton("*");  // Star Symbol
+            stars[i].setFont(new Font("Arial", Font.BOLD, 40));
             stars[i].setFocusPainted(false);
             stars[i].setBorderPainted(false);
             stars[i].setContentAreaFilled(false);
+            stars[i].setOpaque(false); // Make the button transparent
+            stars[i].setForeground(Color.LIGHT_GRAY); // Set default color
 
             // Action Listener to get selected rating
             stars[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     userRating = rating;
+                    updateStarColors(stars);
                     System.out.println("User rated: " + userRating + " stars");
                 }
             });
 
-            starGroup.add(stars[i]);
             panel.add(stars[i]);
         }
 
         return panel;
+    }
+
+    // Method to update star colors based on the selected rating
+    private void updateStarColors(JButton[] stars) {
+        for (int i = 0; i < stars.length; i++) {
+            if (i < userRating) {
+                stars[i].setForeground(Color.YELLOW); // Highlight selected stars
+            } else {
+                stars[i].setForeground(Color.LIGHT_GRAY); // Default color
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -46,5 +59,6 @@ public class StarRating {
         frame.setLayout(new BorderLayout());
         frame.add(starRating.createStarRatingPanel(), BorderLayout.CENTER);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null); // Center the frame
     }
 }
