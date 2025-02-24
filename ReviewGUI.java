@@ -19,7 +19,7 @@ public class ReviewGUI extends JFrame {
         // Create a panel for the review text field and star rating
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-
+        mainPanel.setBackground(Color.WHITE);
         // Create the text field
         JTextField textField = new JTextField();
         textField.setPreferredSize(new Dimension(350, 30));
@@ -31,6 +31,7 @@ public class ReviewGUI extends JFrame {
         // Create the submit button
         JButton submitButton = new JButton("Submit Review");
         mainPanel.add(submitButton);
+        submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         // Add action listener to the submit button
         submitButton.addActionListener(new ActionListener() {
@@ -52,6 +53,7 @@ public class ReviewGUI extends JFrame {
     public JPanel createStarRatingPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
+        panel.setBackground(Color.WHITE);
 
         JButton[] stars = new JButton[5];
 
@@ -63,7 +65,7 @@ public class ReviewGUI extends JFrame {
             stars[i].setBorderPainted(false);
             stars[i].setContentAreaFilled(false);
             stars[i].setOpaque(false); // Make the button transparent
-            stars[i].setForeground(Color.LIGHT_GRAY); // Set default color
+            stars[i].setForeground(Color.BLACK); // Set default color
 
             // Action Listener to get selected rating
             stars[i].addActionListener(new ActionListener() {
@@ -87,7 +89,7 @@ public class ReviewGUI extends JFrame {
             if (i < userRating) {
                 stars[i].setForeground(Color.YELLOW); // Highlight selected stars
             } else {
-                stars[i].setForeground(Color.LIGHT_GRAY); // Default color
+                stars[i].setForeground(Color.BLACK); // Default color
             }
         }
     }
