@@ -42,7 +42,14 @@ public class RecipieCreate extends JFrame implements ActionListener {
         panel.add(createButton);
 
         add(panel);
+
+       
+        
     }
+
+
+
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -74,3 +81,4 @@ public class RecipieCreate extends JFrame implements ActionListener {
         SwingUtilities.invokeLater(() -> new RecipieCreate(recipes).setVisible(true));
     }
 }
+

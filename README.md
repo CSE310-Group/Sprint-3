@@ -18,6 +18,8 @@ List of libraries included to the project:
 - [java.sql]
 - [java.util.ArrayList]
 - [java.util.Scanner]
+- [java.swing]
+- [java.awt]
 
 # Useful Websites
 
