@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javax.swing.SwingUtilities;
+
 public class main {
     public static void main(String args[]) {
         Recipes recipes = new Recipes(); // Shared recipe storage
@@ -8,10 +10,9 @@ public class main {
         System.out.println("Welcome to the Recipe App!");
 
         // Pass recipes object to mainpagegui
-        mainpagegui mainGui = new mainpagegui(recipes);
-        mainGui.setVisible(true); 
-
-        scan.nextLine(); // Wait for user input
-        recipes.printAllRecipes(); // Print all stored recipes
+        Users users = new Users();
+        SwingUtilities.invokeLater(() -> {
+            new UserGUI(users,recipes).setVisible(true);
+        });
     }
 }

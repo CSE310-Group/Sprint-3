@@ -10,8 +10,10 @@ public class UserGUI extends JFrame {
     private JButton submitButton;
     private JButton loginButton;
     private Users users;
+    private Recipes recipies;
 
-    public UserGUI(Users users) {
+    public UserGUI(Users users, Recipes recipies) {
+        this.recipies = recipies;
         this.users = users;
         setTitle("User Login & Registration");
         setSize(300, 250);
@@ -73,7 +75,7 @@ public class UserGUI extends JFrame {
         if (users.authenticateUser(username, password)) {
             JOptionPane.showMessageDialog(this, "Login Successful!");
             this.dispose(); // Close the login window
-            SwingUtilities.invokeLater(() -> new mainpagegui().setVisible(true)); // Open the main GUI
+            SwingUtilities.invokeLater(() -> new mainpagegui(recipies).setVisible(true)); // Open the main GUI
         } else {
             JOptionPane.showMessageDialog(this, "Invalid Username or Password!", "Error", JOptionPane.ERROR_MESSAGE);
         }

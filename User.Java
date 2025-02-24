@@ -10,6 +10,13 @@ public class User {
         this.password = password;
         this.userId = userId;
     }
+    public String getUsername() {
+        return username;
+    }
+    public String getPassword() {
+        return password;
+    }
+
 
     @Override
     public String toString() {
