@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class conversions {  // Renamed class to follow Java conventions 
 
@@ -142,6 +144,36 @@ public class conversions {  // Renamed class to follow Java conventions
         }
         return new String[]{finalAmount, finalUnit};
     }
+
+    public static String half(String recipeText, double factor) {
+        return scaleRecipe(recipeText, factor);
+    }
+    
+    public static String doubleRecipe(String recipeText, double factor) {
+        return scaleRecipe(recipeText, factor);
+    }
+    
+  private static String scaleRecipe(String recipeText, double factor) {
+    StringBuilder updatedRecipe = new StringBuilder();
+    String[] lines = recipeText.split("\n");
+    Pattern pattern = Pattern.compile("(\\d+(\\.\\d+)?)");
+
+    for (String line : lines) {
+        Matcher matcher = pattern.matcher(line);
+        StringBuffer updatedLine = new StringBuffer();
+
+        while (matcher.find()) {
+            double originalValue = Double.parseDouble(matcher.group());
+            double newValue = originalValue * factor;
+            matcher.appendReplacement(updatedLine, decimalToFraction(newValue));
+        }
+        matcher.appendTail(updatedLine);
+        updatedRecipe.append(updatedLine).append("\n");
+    }
+
+    return updatedRecipe.toString().trim();
+}
+
     
        
 

@@ -59,15 +59,22 @@ public class LunchGUI extends JFrame {
     private void loadRecipes() {
         // Dummy recipe data for testing
         String[][] sampleRecipes = {
-            {"Caesar Salad", "1. Chop lettuce.\n2. Add dressing and croutons...", null},
-            {"Grilled Cheese", "1. Butter bread.\n2. Add cheese and grill...", null},
-            {"Pasta Primavera", "1. Cook pasta.\n2. Add veggies and sauce...", null}
+            {"Caesar Salad", 
+             "Ingredients:\n1 head romaine lettuce\n1/2 cup Caesar dressing\n1/4 cup croutons\n\n" +
+             "Instructions:\n1. Chop lettuce.\n2. Add dressing and croutons.", null},
+            {"Grilled Cheese", 
+             "Ingredients:\n2 slices of bread\n1 tablespoon butter\n2 slices of cheese\n\n" +
+             "Instructions:\n1. Butter bread.\n2. Add cheese and grill until golden brown.", null},
+            {"Pasta Primavera", 
+             "Ingredients:\n200g pasta\n1 cup mixed vegetables\n1/4 cup olive oil\n\n" +
+             "Instructions:\n1. Cook pasta according to package instructions.\n2. Add veggies and sauce, and toss to combine.", null}
         };
-
+    
         for (String[] recipe : sampleRecipes) {
             addRecipeToPanel(recipe[0], recipe[1], null);
         }
     }
+    
 
     private void addRecipeToPanel(String name, String description, byte[] imageData) {
         JPanel recipePanel = new JPanel();
@@ -152,6 +159,22 @@ public class LunchGUI extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(halfButton);
         buttonPanel.add(doubleButton);
+
+        halfButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String updatedText = conversions.half(textArea.getText(), 0.5);
+                textArea.setText(updatedText);
+            }
+        });
+    
+        doubleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String updatedText = conversions.doubleRecipe(textArea.getText(), 2);
+                textArea.setText(updatedText);
+            }
+        });
     
         recipeFrame.add(new JScrollPane(textArea), BorderLayout.CENTER);
         recipeFrame.add(buttonPanel, BorderLayout.SOUTH);

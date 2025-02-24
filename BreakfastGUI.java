@@ -153,6 +153,22 @@ public class BreakfastGUI extends JFrame {
         buttonPanel.add(halfButton);
         buttonPanel.add(doubleButton);
     
+        halfButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String updatedText = conversions.half(textArea.getText(), 0.5);
+                textArea.setText(updatedText);
+            }
+        });
+    
+        doubleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String updatedText = conversions.doubleRecipe(textArea.getText(), 2);
+                textArea.setText(updatedText);
+            }
+        });
+    
         recipeFrame.add(new JScrollPane(textArea), BorderLayout.CENTER);
         recipeFrame.add(buttonPanel, BorderLayout.SOUTH);
         recipeFrame.setVisible(true);
