@@ -10,9 +10,10 @@ public class main {
 
         Users users = new Users();
         Recipes recipes = new Recipes();
-        System.out.println("Current User: " + users.getCurrentUser());
-        SwingUtilities.invokeLater(() -> new UserGUI(users, recipes));
-        System.out.println(users.getCurrentUser());
+       
+        SwingUtilities.invokeLater(() -> new UserGUI());
+        
+       
     }
 }
 

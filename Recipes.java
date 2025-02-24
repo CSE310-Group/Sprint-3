@@ -10,6 +10,7 @@ class Recipes {
 
     public Recipes() {
         recipeList = new ArrayList<>();
+        loadFromFile("recipes.txt");
     }
 
     public void addRecipe(Recipe recipe) {

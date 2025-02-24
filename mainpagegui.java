@@ -8,7 +8,7 @@ public class MainPageGUI extends JFrame {
 
     public MainPageGUI(Recipes recipes, Users users) {
         this.recipes = recipes;
-        
+        this.users = users;
         setTitle("Main Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 500);
@@ -63,7 +63,7 @@ public class MainPageGUI extends JFrame {
 
     private void switchUser() {
         dispose();
-        new UserGUI(users ,recipes ); 
+        new UserGUI(recipes, new Users());
     }
 
 

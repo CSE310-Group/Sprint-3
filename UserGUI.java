@@ -11,9 +11,9 @@ class UserGUI extends JFrame {
     private Users users;
     private Recipes recipes;
 
-    public UserGUI(Users users, Recipes recipes) {
-        this.users = users;
-        this.recipes = recipes;
+    public UserGUI() {
+        users = new Users();
+        recipes = new Recipes();
         setTitle("User Login/Register");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
