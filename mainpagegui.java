@@ -2,8 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import javax.swing.SwingUtilities;
-
 public class MainPageGUI extends JFrame {
     private Recipes recipes;
 
@@ -17,7 +15,7 @@ public class MainPageGUI extends JFrame {
         setLayout(new GridLayout(4, 1, 10, 10));
 
         JButton viewRecipesButton = new JButton("View Recipes");
-        viewRecipesButton.addActionListener(e -> viewRecipes());
+        viewRecipesButton.addActionListener(e -> new ViewRecipesGUI(recipes));
         
         JButton createRecipeButton = new JButton("Create Recipe");
         createRecipeButton.addActionListener(e -> {

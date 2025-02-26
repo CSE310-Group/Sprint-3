@@ -1,101 +1,75 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+class ReviewGUI extends JFrame {
+    private int userRating = 0;
+    private int recipeId;
+    private int userId;
+    private JTextField textField;
 
-public class ReviewGUI extends JFrame {
-    private int userRating = 0;  // Stores the selected rating
-
-    public ReviewGUI() {
+    public ReviewGUI(int recipeId, int userId) {
         super("Review GUI");
-        
-        // Set the size of the frame
+        this.recipeId = recipeId;
+        this.userId = userId;
+
         setSize(400, 300);
-        // Set the default close operation to EXIT_ON_CLOSE
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Set the location of the frame to the center of the screen
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Create a panel for the review text field and star rating
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBackground(Color.WHITE);
-        // Create the text field
-        JTextField textField = new JTextField();
+
+        textField = new JTextField();
         textField.setPreferredSize(new Dimension(350, 30));
         mainPanel.add(textField);
-
-        // Add star rating panel
         mainPanel.add(createStarRatingPanel());
 
-        // Create the submit button
         JButton submitButton = new JButton("Submit Review");
-        mainPanel.add(submitButton);
         submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        submitButton.addActionListener(e -> saveReview());
 
-        // Add action listener to the submit button
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String review = textField.getText();
-                System.out.println("User Review: " + review);
-                System.out.println("User Rated: " + userRating + " stars");
-            }
-        });
-
-        // Add the main panel to the frame
+        mainPanel.add(submitButton);
         add(mainPanel);
-
-        // Make the frame visible
         setVisible(true);
     }
 
-    public JPanel createStarRatingPanel() {
+    private JPanel createStarRatingPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         panel.setBackground(Color.WHITE);
 
         JButton[] stars = new JButton[5];
-
         for (int i = 0; i < 5; i++) {
             final int rating = i + 1;
-            stars[i] = new JButton("★");  // Unicode star symbol
-            stars[i].setFont(new Font("SansSerif", Font.BOLD, 40)); // Use a font that supports stars
+            stars[i] = new JButton("★");
+            stars[i].setFont(new Font("SansSerif", Font.BOLD, 40));
             stars[i].setFocusPainted(false);
             stars[i].setBorderPainted(false);
             stars[i].setContentAreaFilled(false);
-            stars[i].setOpaque(false); // Make the button transparent
-            stars[i].setForeground(Color.BLACK); // Set default color
-
-            // Action Listener to get selected rating
-            stars[i].addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    userRating = rating;
-                    updateStarColors(stars);
-                    System.out.println("User rated: " + userRating + " stars");
-                }
+            stars[i].setOpaque(false);
+            stars[i].setForeground(Color.BLACK);
+            stars[i].addActionListener(e -> {
+                userRating = rating;
+                updateStarColors(stars);
             });
-
             panel.add(stars[i]);
         }
-
         return panel;
     }
 
-    // Method to update star colors based on the selected rating
     private void updateStarColors(JButton[] stars) {
         for (int i = 0; i < stars.length; i++) {
-            if (i < userRating) {
-                stars[i].setForeground(Color.YELLOW); // Highlight selected stars
-            } else {
-                stars[i].setForeground(Color.BLACK); // Default color
-            }
+            stars[i].setForeground(i < userRating ? Color.YELLOW : Color.BLACK);
         }
     }
 
-    public static void main(String[] args) {
-        new ReviewGUI();
+    private void saveReview() {
+        String comment = textField.getText().trim();
+        Review review = new Review(userId, recipeId, userRating, comment);
+        Review.saveReview(review);
+        dispose();
     }
 }
-;

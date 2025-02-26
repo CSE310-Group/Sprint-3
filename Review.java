@@ -1,26 +1,47 @@
-public class Review {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+class Review {
+    private int userId;
+    private int recipeId;
     private int rating;
     private String comment;
-    private int userID;
-    private int recipeID;
 
-    // Constructor inside the class
-    public Review(int rating, String comment, int userID, int recipeID) {
+    public Review(int userId, int recipeId, int rating, String comment) {
+        this.userId = userId;
+        this.recipeId = recipeId;
         this.rating = rating;
         this.comment = comment;
-        this.userID = userID;
-        this.recipeID = recipeID;
+    }
+    public int getUserId() {
+        return userId;
+    }
+    public int getRecipeId() {
+        return recipeId;
+    }
+    public int getRating() {
+        return rating;
+    }
+    public String getComment() {
+        return comment;
     }
 
-    // Getter methods
-    public int getRating() { return rating; }
-    public String getComment() { return comment; }
-    public int getUserID() { return userID; }
-    public int getRecipeID() { return recipeID; }
+    public String toFileFormat() {
+        return userId + "|" + recipeId + "|" + rating + "|" + comment;
+    }
 
-    // Setter methods
-    public void setRating(int rating) { this.rating = rating; }
-    public void setComment(String comment) { this.comment = comment; }
-    public void setUserID(int userID) { this.userID = userID; }
-    public void setRecipeID(int recipeID) { this.recipeID = recipeID; }
+    public static Review fromFileFormat(String line) {
+        String[] parts = line.split("\\|");
+        return new Review(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), parts[3]);
+    }
+
+    public static void saveReview(Review review) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("reviews.txt", true))) {
+            writer.println(review.toFileFormat());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
