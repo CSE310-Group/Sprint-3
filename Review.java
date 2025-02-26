@@ -6,35 +6,25 @@ import java.util.*;
 class Review {
     private int userId;
     private int recipeId;
+    private String username;
     private int rating;
     private String comment;
 
-    public Review(int userId, int recipeId, int rating, String comment) {
+    public Review(int userId, int recipeId, String username, int rating, String comment) {
         this.userId = userId;
         this.recipeId = recipeId;
+        this.username = username;
         this.rating = rating;
         this.comment = comment;
     }
-    public int getUserId() {
-        return userId;
-    }
-    public int getRecipeId() {
-        return recipeId;
-    }
-    public int getRating() {
-        return rating;
-    }
-    public String getComment() {
-        return comment;
-    }
 
     public String toFileFormat() {
-        return userId + "|" + recipeId + "|" + rating + "|" + comment;
+        return userId + "|" + recipeId + "|" + username + "|" + rating + "|" + comment;
     }
 
     public static Review fromFileFormat(String line) {
         String[] parts = line.split("\\|");
-        return new Review(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), parts[3]);
+        return new Review(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), parts[2], Integer.parseInt(parts[3]), parts[4]);
     }
 
     public static void saveReview(Review review) {
@@ -44,4 +34,17 @@ class Review {
             e.printStackTrace();
         }
     }
+    public int getRating() {
+        return rating;
+    }
+    public String getComment() {
+        return comment;
+    }
+    public int getRecipeId() {
+        return recipeId;
+    }
+    public String getUsername() {
+        return username;
+    }
+    
 }

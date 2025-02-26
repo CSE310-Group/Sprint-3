@@ -3,16 +3,22 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+
 class ReviewGUI extends JFrame {
     private int userRating = 0;
     private int recipeId;
-    private int userId;
+    private String username;
     private JTextField textField;
 
-    public ReviewGUI(int recipeId, int userId) {
+    public ReviewGUI(int recipeId, int userId, String username) {
         super("Review GUI");
         this.recipeId = recipeId;
-        this.userId = userId;
+        this.username = username;
 
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -29,7 +35,7 @@ class ReviewGUI extends JFrame {
 
         JButton submitButton = new JButton("Submit Review");
         submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        submitButton.addActionListener(e -> saveReview());
+        submitButton.addActionListener(e -> saveReview(userId));
 
         mainPanel.add(submitButton);
         add(mainPanel);
@@ -66,9 +72,9 @@ class ReviewGUI extends JFrame {
         }
     }
 
-    private void saveReview() {
+    private void saveReview(int userId) {
         String comment = textField.getText().trim();
-        Review review = new Review(userId, recipeId, userRating, comment);
+        Review review = new Review(userId, recipeId, username, userRating, comment);
         Review.saveReview(review);
         dispose();
     }
