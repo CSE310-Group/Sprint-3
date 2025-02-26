@@ -32,9 +32,11 @@ class ViewRecipesGUI {
             recipeBox.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             recipeBox.setMaximumSize(new Dimension(450, 100));
             
-            JLabel nameLabel = new JLabel(recipe.getName());
-            nameLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
-            recipeBox.add(nameLabel, BorderLayout.NORTH);
+            JLabel nameLabel = new JLabel(recipe.getName(), SwingConstants.CENTER);
+            nameLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+            nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            
+            recipeBox.add(nameLabel, BorderLayout.CENTER);
 
             JButton viewButton = new JButton("View");
             viewButton.addActionListener(e -> new RecipeDetailGUI(recipe));
